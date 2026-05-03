@@ -8,6 +8,7 @@ import Calendar from './pages/Calendar';
 import TodoList from './pages/TodoList';
 import Pomodoro from './pages/Pomodoro';
 import StudyPlanner from './pages/StudyPlanner';
+import ResetPassword from './pages/ResetPassword';
 
 
 const PrivateRoute = ({ children }) => {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/pomodoro" element={<PrivateRoute><Pomodoro /></PrivateRoute>} />
         <Route path="/study-planner" element={<PrivateRoute><StudyPlanner /></PrivateRoute>} />
         <Route path="/study" element={<PrivateRoute><StudyPlanner /></PrivateRoute>} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
       </Routes>
     </BrowserRouter>

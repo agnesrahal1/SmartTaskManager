@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Taski</string>
+    <string name="title_activity_main">Taski</string>
+    <string name="package_name">com.agnesrahal.taski</string>
+    <string name="custom_url_scheme">com.agnesrahal.taski</string>
+</resources>

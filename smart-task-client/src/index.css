@@ -18,7 +18,7 @@ body {
   border: none !important;
   color: #f0f0f0 !important;
   font-family: 'Segoe UI', sans-serif !important;
-  width: 340px !important;
+  width: 100% !important;
 }
 .react-calendar__tile {
   color: #aaa !important;

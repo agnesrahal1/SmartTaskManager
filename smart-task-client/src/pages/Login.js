@@ -23,15 +23,18 @@ export default function Login() {
   return (
     <div style={styles.wrapper}>
       <div style={styles.card}>
-        <h2 style={styles.title}>TaskOracle 🧠</h2>
+        <h2 style={styles.title}>Taski 🧠</h2>
         <p style={styles.sub}>Sign in to your account</p>
         {error && <p style={styles.error}>{error}</p>}
         <input style={styles.input} name="email" placeholder="Email" onChange={handle} />
         <input style={styles.input} name="password" type="password" placeholder="Password" onChange={handle} />
         <button style={styles.btn} onClick={submit}>Login</button>
-        <p style={styles.link}>No account? <Link to="/register" style={{ color: '#7F77DD' }}>Register</Link></p>
-      </div>
-    </div>
+        <p style={styles.link}>
+          No account? <Link to="/register" style={{ color: '#7F77DD' }}>Register</Link>
+          {' · '}
+         <Link to="/reset-password" style={{ color: '#7F77DD' }}>Forgot password?</Link>
+        </p>      </div>
+        </div>
   );
 }
 

@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import api from '../api';
 import Sidebar from '../components/Sidebar';
 
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
+
 export default function Analytics() {
   const [data, setData] = useState(null);
 
@@ -97,10 +100,18 @@ export default function Analytics() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh' },
-  main: { marginLeft: '220px', flex: 1, padding: '2rem 2.5rem' },
-  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
   pageSub: { fontSize: '13px', color: '#555', marginBottom: '2rem' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '2rem' },
+grid: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', 
+  gap: '16px', 
+  marginBottom: '2rem' 
+},
   metricCard: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' },
   metricLabel: { fontSize: '12px', color: '#555', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '10px' },
   metricValue: { fontSize: '36px', fontWeight: '700' },

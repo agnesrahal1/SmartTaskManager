@@ -3,7 +3,8 @@ import Sidebar from '../components/Sidebar';
 import api from '../api';
 import ReactCalendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 export default function Calendar() {
   const [tasks, setTasks] = useState([]);
   const [selected, setSelected] = useState(new Date());
@@ -88,11 +89,18 @@ export default function Calendar() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh' },
-  main: { marginLeft: '220px', flex: 1, padding: '2rem 2.5rem' },
-  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
   pageSub: { fontSize: '13px', color: '#555', marginBottom: '2rem' },
-  content: { display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1.5rem', alignItems: 'start' },
-  calCard: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.25rem' },
+content: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr', 
+  gap: '1.5rem', 
+  alignItems: 'start' 
+},  calCard: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.25rem' },
   taskPanel: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.5rem', minHeight: '400px' },
   dateTitle: { fontSize: '16px', fontWeight: '600', color: '#7F77DD', marginBottom: '1.25rem' },
   taskItem: { background: '#0d0d18', border: '1px solid #2a2a3a', borderRadius: '12px', padding: '1rem', marginBottom: '10px' },

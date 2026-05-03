@@ -3,7 +3,8 @@ import Sidebar from '../components/Sidebar';
 import api from '../api';
 
 const MODES = { WORK: 'work', BREAK: 'break' };
-
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 const LOFI_TRACKS = [
   { name: 'Lofi Study Beats', url: 'https://stream.zeno.fm/f3wvbbqmdg8uv' },
   { name: 'Chillhop Radio', url: 'https://stream.zeno.fm/0r0xa792kwzuv' },
@@ -353,8 +354,11 @@ export default function Pomodoro() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh', background: '#0e0b08' },
-  main: { marginLeft: '220px', flex: 1, position: 'relative', overflow: 'hidden' },
-  blob1: { position: 'fixed', width: '500px', height: '500px', borderRadius: '50%', top: '-100px', right: '-100px', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  blob1: { position: 'fixed', width: '500px', height: '500px', borderRadius: '50%', top: '-100px', right: '-100px', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 },
   blob2: { position: 'fixed', width: '400px', height: '400px', borderRadius: '50%', bottom: '-50px', left: '200px', filter: 'blur(100px)', pointerEvents: 'none', zIndex: 0 },
   blob3: { position: 'fixed', width: '300px', height: '300px', borderRadius: '50%', top: '50%', right: '20%', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 },
   content: { position: 'relative', zIndex: 1, padding: '2rem 2.5rem', maxWidth: '700px', margin: '0 auto' },

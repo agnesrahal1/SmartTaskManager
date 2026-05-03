@@ -6,7 +6,8 @@ import api from '../api';
 const COLORS = ['#7F77DD', '#E8A87C', '#87B5A2', '#ff6b6b', '#ffa94d', '#69db7c', '#c77dff', '#48cae4'];
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
 const diffColor = { Easy: '#69db7c', Medium: '#ffa94d', Hard: '#ff6b6b' };
-
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 export default function StudyPlanner() {
   const [subjects, setSubjects] = useState([]);
   const [schedule, setSchedule] = useState([]);
@@ -506,9 +507,17 @@ export default function StudyPlanner() {
 }
 
 const styles = {
+  subjectGrid: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))', 
+  gap: '16px' 
+},
   layout: { display: 'flex', minHeight: '100vh', background: '#080810' },
-  main: { marginLeft: '220px', flex: 1, position: 'relative', overflow: 'hidden' },
-  bgBlob1: { position: 'fixed', width: '500px', height: '500px', borderRadius: '50%', top: '-100px', right: '-100px', background: '#7F77DD18', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  bgBlob1: { position: 'fixed', width: '500px', height: '500px', borderRadius: '50%', top: '-100px', right: '-100px', background: '#7F77DD18', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 },
   bgBlob2: { position: 'fixed', width: '400px', height: '400px', borderRadius: '50%', bottom: '-50px', left: '200px', background: '#87B5A218', filter: 'blur(100px)', pointerEvents: 'none', zIndex: 0 },
   content: { position: 'relative', zIndex: 1, padding: '2rem 2.5rem' },
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' },
@@ -532,7 +541,12 @@ const styles = {
   completedTag: { fontSize: '12px', color: '#69db7c', fontWeight: '600' },
   formCard: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.5rem' },
   formTitle: { fontSize: '16px', fontWeight: '600', color: '#7F77DD', marginBottom: '1rem' },
-  formGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' },
+formGrid: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+  gap: '10px', 
+  marginBottom: '12px' 
+},
   input: { padding: '11px 14px', borderRadius: '10px', border: '1px solid #2a2a3a', background: '#0d0d18', color: '#fff', fontSize: '14px', outline: 'none' },
   colorRow: { display: 'flex', alignItems: 'center', gap: '8px' },
   colorLabel: { fontSize: '12px', color: '#555' },

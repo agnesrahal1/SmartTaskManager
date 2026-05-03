@@ -5,7 +5,8 @@ import Toast from '../components/Toast';
 import Timer from '../components/Timer';
 
 const priorityColor = { High: '#ff6b6b', Medium: '#ffa94d', Low: '#69db7c' };
-
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [toast, setToast] = useState(null);
@@ -159,8 +160,11 @@ export default function TodoList() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh' },
-  main: { marginLeft: '220px', flex: 1, padding: '2rem 2.5rem' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' },
   pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
   pageSub: { fontSize: '13px', color: '#555' },
   progressCard: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '14px', padding: '1.25rem 1.5rem', marginBottom: '1.5rem' },
@@ -169,9 +173,28 @@ const styles = {
   progressNum: { fontSize: '13px', fontWeight: '700', color: '#7F77DD' },
   progressTrack: { height: '8px', background: '#2a2a3a', borderRadius: '4px', overflow: 'hidden' },
   progressFill: { height: '100%', background: 'linear-gradient(90deg, #7F77DD, #69db7c)', borderRadius: '4px', transition: 'width 0.6s ease' },
-  controls: { display: 'flex', gap: '12px', marginBottom: '1.5rem', alignItems: 'center' },
-  search: { padding: '10px 14px', borderRadius: '10px', border: '1px solid #2a2a3a', background: '#0d0d18', color: '#fff', fontSize: '14px', width: '260px', outline: 'none' },
-  filters: { display: 'flex', gap: '6px' },
+  controls: { 
+  display: 'flex', 
+  gap: '12px', 
+  marginBottom: '1.5rem', 
+  alignItems: 'center', 'flex-start': true,
+  flexDirection: isMobile ? 'column' : 'row',
+},
+search: { 
+  padding: '10px 14px', 
+  borderRadius: '10px', 
+  border: '1px solid #2a2a3a', 
+  background: '#0d0d18', 
+  color: '#fff', 
+  fontSize: '14px', 
+  width: isMobile ? '100%' : '260px', 
+  outline: 'none' 
+},
+filters: { 
+  display: 'flex', 
+  gap: '6px', 
+  flexWrap: 'wrap' 
+},
   filterBtn: { padding: '8px 14px', borderRadius: '20px', background: 'transparent', border: '1px solid #2a2a3a', color: '#666', cursor: 'pointer', fontSize: '12px' },
   filterActive: { background: '#7F77DD22', border: '1px solid #7F77DD', color: '#7F77DD' },
   group: { marginBottom: '1.5rem' },

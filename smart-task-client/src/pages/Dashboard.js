@@ -6,7 +6,8 @@ import Toast from '../components/Toast';
 import Modal from '../components/Modal';
 
 const FILTERS = ['All', 'Pending', 'InProgress', 'Completed'];
-
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -192,8 +193,11 @@ export default function Dashboard() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh' },
-  main: { marginLeft: '220px', flex: 1, padding: '2rem 2.5rem' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' },
   pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0' },
   pageSub: { fontSize: '13px', color: '#555', marginTop: '4px' },
   addBtn: { padding: '10px 20px', borderRadius: '10px', background: 'linear-gradient(135deg, #7F77DD, #9f77dd)', border: 'none', color: '#fff', fontWeight: '600', cursor: 'pointer', fontSize: '14px' },
@@ -204,11 +208,20 @@ const styles = {
   filterActive: { background: '#7F77DD22', border: '1px solid #7F77DD', color: '#7F77DD' },
   form: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.5rem' },
   formTitle: { fontSize: '16px', fontWeight: '600', color: '#7F77DD', marginBottom: '1rem' },
-  formGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' },
+formGrid: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+  gap: '10px', 
+  marginBottom: '12px' 
+},
   input: { padding: '11px 14px', borderRadius: '10px', border: '1px solid #2a2a3a', background: '#0d0d18', color: '#fff', fontSize: '14px', outline: 'none' },
   btn: { padding: '11px 24px', borderRadius: '10px', background: 'linear-gradient(135deg, #7F77DD, #9f77dd)', border: 'none', color: '#fff', fontWeight: '600', cursor: 'pointer', fontSize: '14px' },
   cancelBtn: { padding: '11px 24px', borderRadius: '10px', background: 'transparent', border: '1px solid #2a2a3a', color: '#666', cursor: 'pointer', fontSize: '14px' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' },
+grid: { 
+  display: 'grid', 
+  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))', 
+  gap: '16px' 
+},
   empty: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '5rem', textAlign: 'center' },
   emptyIcon: { fontSize: '48px', marginBottom: '1rem' },
   emptyTitle: { fontSize: '20px', fontWeight: '600', color: '#444', marginBottom: '8px' },

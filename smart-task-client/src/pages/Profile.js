@@ -1,5 +1,7 @@
 import Sidebar from '../components/Sidebar';
 
+const isMobile = window.innerWidth <= 768 ||
+  (window.Capacitor !== undefined && window.Capacitor.isNativePlatform());
 export default function Profile() {
   const token = localStorage.getItem('token');
   let name = 'User';
@@ -51,8 +53,11 @@ export default function Profile() {
 
 const styles = {
   layout: { display: 'flex', minHeight: '100vh' },
-  main: { marginLeft: '220px', flex: 1, padding: '2rem 2.5rem' },
-  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
+main: { 
+  marginLeft: isMobile ? '0' : '220px', 
+  flex: 1, 
+  padding: isMobile ? '72px 1rem 80px' : '2rem 2.5rem' 
+},  pageTitle: { fontSize: '26px', fontWeight: '700', color: '#f0f0f0', marginBottom: '4px' },
   pageSub: { fontSize: '13px', color: '#555', marginBottom: '2rem' },
   card: { background: 'linear-gradient(135deg, #1a1a2e, #16162a)', border: '1px solid #2a2a3a', borderRadius: '16px', padding: '2rem', display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1rem' },
   avatar: { width: '72px', height: '72px', borderRadius: '50%', background: 'linear-gradient(135deg, #7F77DD, #9f77dd)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', fontWeight: '700', color: '#fff', flexShrink: 0 },
